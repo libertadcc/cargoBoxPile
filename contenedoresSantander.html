@@ -32,13 +32,18 @@
       var view = new SceneView({
         container: "viewDiv",
         map: map,
-        camera: { 
+        camera: {
           position: {
-            x: -3.818255,
-            y: 43.406023,
-            z: 1000
+            spatialReference: {
+              latestWkid: 3857,
+              wkid: 102100
+            },
+            x: -425070.0111978481,
+            y: 5373924.90982777,
+            z: 16.01569370366633
           },
-          tilt: 30,
+          heading: 24.62063781542253,
+          tilt: 71.0345229111664
         }
       });
 
@@ -88,12 +93,9 @@
       });
 
       var layer = new GraphicsLayer({
-        graphics: [
-          containerGraphic1, containerGraphic2, containerGraphic3
-      ]
+        graphics: [ containerGraphic1, containerGraphic2, containerGraphic3 ]
       });
 
-      // Add GraphicsLayer to Map object
       map.add(layer);
     });
   </script>
