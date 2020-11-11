@@ -1,0 +1,104 @@
+<!DOCTYPE >
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Containers de carga en el puerto de Santander</title>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.17/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.17/"></script>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/SceneView",
+      "esri/layers/GraphicsLayer",
+      "esri/Graphic",
+      "esri/symbols/WebStyleSymbol"
+    ], function(Map, SceneView, GraphicsLayer, Graphic, WebStyleSymbol) {
+
+      var map = new Map({
+        basemap: "satellite",
+      });
+
+      var view = new SceneView({
+        container: "viewDiv",
+        map: map,
+        camera: { 
+          position: {
+            x: -3.818255,
+            y: 43.406023,
+            z: 1000
+          },
+          tilt: 30,
+        }
+      });
+
+
+      var graphicsLayer = new GraphicsLayer();
+      map.add(graphicsLayer);
+
+      var containerSymbol = new WebStyleSymbol({
+        name: "Cargo_Box",
+        styleName: "EsriRealisticTransportationStyle",
+      });
+    
+      var container1 = {
+        type: "point",
+        x: -3.818255,
+        y: 43.406023,
+      };
+      
+      var container2 = {
+        type: "point",
+        x: -3.818255,
+        y: 43.406023,
+        z: 2
+      };
+
+      var container3 = {
+        type: "point",
+        x: -3.818255,
+        y: 43.406023,
+        z: 4
+      };
+ 
+    
+      var containerGraphic1 = new Graphic({
+        geometry: container1,
+        symbol: containerSymbol
+      });
+
+      var containerGraphic2 = new Graphic({
+        geometry: container2,
+        symbol: containerSymbol
+      });
+
+      var containerGraphic3 = new Graphic({
+        geometry: container3,
+        symbol: containerSymbol
+      });
+
+      var layer = new GraphicsLayer({
+        graphics: [
+          containerGraphic1, containerGraphic2, containerGraphic3
+      ]
+      });
+
+      // Add GraphicsLayer to Map object
+      map.add(layer);
+    });
+  </script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
