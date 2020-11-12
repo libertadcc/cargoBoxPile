@@ -18,14 +18,14 @@
 
   <script>
     require([
-      "esri/Map",
+      "esri/WebScene",
       "esri/views/SceneView",
       "esri/layers/GraphicsLayer",
       "esri/Graphic",
       "esri/symbols/WebStyleSymbol"
-    ], function(Map, SceneView, GraphicsLayer, Graphic, WebStyleSymbol) {
-
-      var map = new Map({
+    ], function(WebScene, SceneView, GraphicsLayer, Graphic, WebStyleSymbol) {
+      
+      var map = new WebScene({
         basemap: "satellite",
       });
 
@@ -51,6 +51,8 @@
       var graphicsLayer = new GraphicsLayer();
       map.add(graphicsLayer);
 
+      // Contenedores realistas
+
       var containerSymbol = new WebStyleSymbol({
         name: "Cargo_Box",
         styleName: "EsriRealisticTransportationStyle",
@@ -69,14 +71,6 @@
         z: 2
       };
 
-      var container3 = {
-        type: "point",
-        x: -3.818255,
-        y: 43.406023,
-        z: 4
-      };
- 
-    
       var containerGraphic1 = new Graphic({
         geometry: container1,
         symbol: containerSymbol
@@ -87,13 +81,99 @@
         symbol: containerSymbol
       });
 
+      // Contenedor de 20 pies
+
+      var containerRed20feet = {
+        type: "point-3d",  
+        symbolLayers: [{
+          type: "object",
+          width: 2.44, 
+          height: 2.5,
+          depth: 6.10,
+          resource: { primitive: "cube" },
+          material: { color: "red" }
+        }]
+      };
+
+      var containerBlue20feet = {
+        type: "point-3d",  
+        symbolLayers: [{
+          type: "object",
+          width: 2.44, 
+          height: 2.5,
+          depth: 6.10,
+          resource: { primitive: "cube" },
+          material: { color: "blue" }
+        }]
+      };
+
+      var container3 = {
+        type: "point",
+        x: -3.818299,
+        y: 43.406023,
+        z: 1.5
+      };
+     
+      var container4 = {
+        type: "point",
+        x: -3.818299,
+        y: 43.406023,
+        z: 4
+      };
+
       var containerGraphic3 = new Graphic({
         geometry: container3,
-        symbol: containerSymbol
+        symbol: containerRed20feet
+      });
+      var containerGraphic4 = new Graphic({
+        geometry: container4,
+        symbol: containerBlue20feet
       });
 
-      var layer = new GraphicsLayer({
-        graphics: [ containerGraphic1, containerGraphic2, containerGraphic3 ]
+      // Contenedor de 40 pies
+      
+      var containerGreen40feet = {
+        type: "point-3d",
+        symbolLayers: [{
+          type: "object", 
+          width: 2.44,  
+          height: 2.5, 
+          depth: 12,  
+          resource: { primitive: "cube" },
+          material: { color: "green" }
+        }]
+      };
+
+      var container5 = {
+        type: "point",
+        x: -3.818391,
+        y: 43.406023,
+        z: 1.5
+      };
+     
+      var container6 = {
+        type: "point",
+        x: -3.818391,
+        y: 43.406023,
+        z: 4
+      };
+     
+
+      var containerGraphic5 = new Graphic({
+        geometry: container5,
+        symbol: containerGreen40feet
+      });
+
+      var containerGraphic6 = new Graphic({
+        geometry: container6,
+        symbol: containerRed20feet
+      });
+
+      layer = new GraphicsLayer({
+        graphics: [ containerGraphic1, containerGraphic2, 
+          containerGraphic3, containerGraphic4,
+          containerGraphic5, containerGraphic6
+        ]
       });
 
       map.add(layer);
